@@ -22,6 +22,24 @@ public class Main {
         WebElement submit = driver.findElement(By.id("login-form-submit-btn"));
         submit.submit();
 
+        //Vyhľadávanie na základe ID HTML tagu
+        //WebElement usernameID = driver.findElement(By.id("login_field"));
+        //Vyhľadávanie na základe mena HTML tagu
+        //WebElement usernameName = driver.findElement(By.name("login_field"));
+        //Vyhľadávanie na základe css class name
+        //WebElement usernameClassName = driver.findElement(By.className("login_field"));
+        //Vyhľadávanie na základe HTML tagu podla typu
+        //WebElement usernameTagName = driver.findElement(By.tagName("input"));
+        //Vyhľadávanie na základe obsahu linku
+        //<a href="fdsafdsa">A href je nasa hviezda</a>
+        //WebElement usernameLinkText = driver.findElement(By.linkText("A href je nasa hviezda"));
+        //Vyhľadávanie na základe časti obsahu linku
+        //WebElement usernameParcialLinkText = driver.findElement(By.partialLinkText("A href"));
+        //Vyhľadávanie na základe CSS selectorov
+        //WebElement usernameCss = driver.findElement(By.cssSelector("input[class=login_field]"));
+        //Vyhľadávanie na základe XPath
+        //WebElement usernameXpath = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div[3]/span/div/div/div/div[3]/div[1]/button[2]/div"));
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
