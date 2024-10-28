@@ -5,6 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -54,6 +61,7 @@ public class Main {
         }
          */
 
+        /*
         driver.get("https://www.alza.sk/mobily/18843445.htm");
         try {
             WebElement cookiebutton = driver.findElement(By.xpath("//*[@id=\"rootHtml\"]/body/div[9]/div/div/div[2]/a[1]"));
@@ -113,5 +121,44 @@ public class Main {
         } finally {
             driver.quit();
         }
+         */
+
+        driver.get("https://google.com");
+
+        try {
+            WebElement cookiesButton = driver.findElement(By.xpath("//*[@id=\"L2AGLb\"]/div"));
+            cookiesButton.click();
+            // Nájdeme vyhľadávací box a zadáme do neho text
+            WebElement searchBox = driver.findElement(By.name("q"));
+            searchBox.sendKeys("UKF je najlepsia");
+            searchBox.submit();
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            // Uloženie súboru
+            FileUtils.copyFile(screenshot, new File("screenshot.png"));
+            // Otvoríme nový tab pomocou JavaScriptu
+            ((JavascriptExecutor)driver).executeScript("window.open()");
+
+            // Získame handle na všetky otvorené okná/taby
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+
+            // Prepneme sa na nový tab, ktorý bude druhý v zozname
+            driver.switchTo().window(tabs.get(1));
+
+            // Otvoríme URL v novom tabe
+            driver.get("https://ais2.ukf.sk");
+            Thread.sleep(5000);
+
+            // Ak chcete zatvoriť aktuálny tab
+            driver.close();
+
+            // Prepnite sa späť na pôvodný tab, ak je to potrebné
+            driver.switchTo().window(tabs.get(0));
+            Thread.sleep(5000);  // Pozastaviť vykonávanie na 5 sekúnd
+        }  catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        driver.quit();
     }
 }
